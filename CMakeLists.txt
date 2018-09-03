@@ -55,7 +55,7 @@ IF( NOT CMAKE_BUILD_TYPE )
 ENDIF( NOT CMAKE_BUILD_TYPE )
 
 
-option(QPOASES_BUILD_EXAMPLES "Build examples." ON)
+option(QPOASES_BUILD_EXAMPLES "Build examples." OFF)
 
 
 ############################################################
@@ -105,7 +105,8 @@ FILE(GLOB SRC src/*.cpp)
 
 # library
 ADD_LIBRARY(qpOASES STATIC ${SRC})
-INSTALL(TARGETS qpOASES
+configure_file(${PROJECT_NAME}-config.cmake.in ${PROJECT_NAME}-config.cmake @ONLY)
+INSTALL(TARGETS qpOASES EXPORT qpOASES-targets
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib
   RUNTIME DESTINATION lib
@@ -115,6 +116,7 @@ SET_TARGET_PROPERTIES(
     PROPERTIES
     SOVERSION ${PACKAGE_SO_VERSION}
     )
+INSTALL(EXPORT qpOASES-targets NAMESPACE :: DESTINATION lib/cmake/qpOASES)
 
 # headers
 INSTALL(FILES include/qpOASES.hpp

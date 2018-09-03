@@ -438,7 +438,16 @@ returnValue QProblem::init(	const char* const H_file, const char* const g_file, 
 	}
 }
 
-
+/*
+ *	i n i t @rudanj
+ */
+returnValue QProblem::init( const real_t* const _H, const real_t* const _g, const real_t* const _A,
+							const real_t* const _lb, const real_t* const _ub,
+							const real_t* const _lbA, const real_t* const _ubA,
+							int_t& nWSR, const real_t* const yOpt)
+{
+	return init(_H, _g, _A, _lb, _ub, _lbA, _ubA, nWSR, 0, 0, yOpt, 0, 0, 0);
+}
 
 /*
  *	h o t s t a r t
