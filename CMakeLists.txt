@@ -105,7 +105,6 @@ FILE(GLOB SRC src/*.cpp)
 
 # library
 ADD_LIBRARY(qpOASES STATIC ${SRC})
-configure_file(${PROJECT_NAME}-config.cmake.in ${PROJECT_NAME}-config.cmake @ONLY)
 INSTALL(TARGETS qpOASES EXPORT qpOASES-targets
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib
@@ -116,7 +115,7 @@ SET_TARGET_PROPERTIES(
     PROPERTIES
     SOVERSION ${PACKAGE_SO_VERSION}
     )
-INSTALL(EXPORT qpOASES-targets NAMESPACE :: DESTINATION lib/cmake/qpOASES)
+INSTALL(EXPORT qpOASES-targets NAMESPACE :: DESTINATION lib/cmake/qpOASES FILE qpoases-config.cmake)
 
 # headers
 INSTALL(FILES include/qpOASES.hpp
