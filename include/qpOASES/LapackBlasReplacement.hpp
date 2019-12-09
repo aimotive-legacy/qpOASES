@@ -40,7 +40,7 @@
 #ifdef __AVOID_LA_NAMING_CONFLICTS__
 
 	#define SGEMM  qpOASES_sgemm
-	#define DGEMM  qpOASES_gemm
+	#define DGEMM  qpOASES_dgemm
 	#define SPOTRF qpOASES_spotrf
 	#define DPOTRF qpOASES_dpotrf
 	#define STRTRS qpOASES_strtrs
