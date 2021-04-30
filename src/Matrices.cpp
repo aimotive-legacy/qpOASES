@@ -645,19 +645,24 @@ returnValue SymDenseMat::bilinear(	const Indexlist* const icols,
 	/* exploit symmetry of A ! */
 	for (j = 0; j < icols->length; j++) {
 		irA = icols->number[j] * leaDim;
-		for (i = 0; i < icols->length; i++)
-		{
+		for (i = 0; i < icols->length; i++) {
 			real_t h = val[irA+icols->number[i]];
-			for (k = 0; k < xN; k++)
-				Ax[j + k * icols->length] += h * x[k*xLD+icols->number[i]];
+			if(h != 0.0) {
+				for (k = 0; k < xN; k++) {
+					Ax[j + k * icols->length] += h * x[k*xLD+icols->number[i]];
+				}
+			}
 		}
 	}
 
 	for (ii = 0; ii < icols->length; ++ii) {
 		col = icols->number[ii];
 		for (jj = 0; jj < xN; ++jj) {
-			for (kk = 0; kk < xN; ++kk) {
-				y[kk + jj*yLD] += x[col + jj*xLD] * Ax[ii + kk*icols->length];
+			real_t h = x[col + jj*xLD];
+			if(h != 0.0) {
+				for (kk = 0; kk < xN; ++kk) {
+					y[kk + jj*yLD] += h * Ax[ii + kk*icols->length];
+				}
 			}
 		}
 	}
